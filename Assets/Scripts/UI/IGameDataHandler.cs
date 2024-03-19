@@ -4,6 +4,6 @@ namespace UI
 {
     public interface IGameDataHandler
     {
-        void InjectData(IGameData gameData);
+        void InjectData(GameDataContainer gameDataContainer);
     }
 }

@@ -19,7 +19,7 @@ public class MainController : MonoBehaviour
         apiRequest.GetParsedData(ApiRequest_OnSuccess, ApiRequest_OnFail).Forget(); // Forget() is there to make it clear that await is to be avoided.
     }
 
-    private void ApiRequest_OnSuccess(IGameData gameData)
+    private void ApiRequest_OnSuccess(GameDataContainer gameData)
     {
         if (_gamesWindow is IGameDataHandler gameDataHandler)
         {

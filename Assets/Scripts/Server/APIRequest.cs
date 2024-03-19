@@ -9,7 +9,7 @@ namespace Server
 {
     public class APIRequest
     {
-        public async UniTask GetParsedData(Action<IGameData> onSuccess, Action<Exception> onFail)
+        public async UniTask GetParsedData(Action<GameDataContainer> onSuccess, Action<Exception> onFail)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace Server
                 httpResponce.EnsureSuccessStatusCode(); // Throws an exception if the IsSuccessStatusCode property for the HTTP response is false.
 
                 var result = await httpResponce.Content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<IGameData>(result);
+                var data = JsonConvert.DeserializeObject<GameDataContainer>(result);
                 onSuccess?.Invoke(data);
             }
             catch (System.Exception exception)

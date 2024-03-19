@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf82c120a15a924e8fb6e404ee44891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _content: {fileID: 937403853}
+  _canvasGroupContent: {fileID: 937403855}
   _gridParent: {fileID: 521424745}
   _assetName: Assets/Prefabs/GameSimpleItem.prefab
   _closeButton: []
@@ -739,6 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 937403853}
   - component: {fileID: 937403854}
+  - component: {fileID: 937403855}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -774,6 +775,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937403852}
   m_CullTransparentMesh: 1
+--- !u!225 &937403855
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937403852}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1081749659
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using Extensions;
+﻿using Extensions;
 using Server.Data;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ namespace UI
     public class SimpleGamesWindow : GamesWindow, IGameDataHandler
     {
         [SerializeField]
-        private RectTransform _content;
+        private CanvasGroup _canvasGroupContent;
 
         [SerializeField]
         private GridLayoutGroup _gridParent;
@@ -30,17 +29,18 @@ namespace UI
         public override void Initialize()
         {
             InitializeCloseButtons();
-
         }
 
         public override void Activate()
         {
-            _content.gameObject.SetActive(true);
+            _canvasGroupContent.alpha = 1f;
+            _canvasGroupContent.interactable = true;
         }
 
         public override void Deactivate()
         {
-            _content.gameObject.SetActive(false);
+            _canvasGroupContent.alpha = 0f;
+            _canvasGroupContent.interactable = false;
         }
 
         public async void InjectData(GameDataContainer gameDataContainer)
@@ -53,17 +53,10 @@ namespace UI
 
             _gameDataContainer = gameDataContainer;
 
-            var result = await AddressableAssetLoader.LoadAsset<GameObject>(_assetName);
+            var result = await AddressableAssetLoader.LoadAsset<SimpleGameItem>(_assetName);
             if (result.IsSuccesful)
             {
-                if (result.Data.TryGetComponent(out SimpleGameItem gameItem))
-                {
-                    AssetLoader_OnSuccess(gameItem);
-                }
-                else
-                {
-                    Debug.LogError("Some error");
-                }
+                
             }
             else
             {

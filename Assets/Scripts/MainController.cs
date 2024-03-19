@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Extensions;
 using Server;
 using Server.Data;
 using UI;
@@ -9,14 +10,22 @@ public class MainController : MonoBehaviour
     [SerializeField]
     private GamesWindow _gamesWindow;
 
-    private void Awake()
+    private async void Awake()
     {
         _gamesWindow.Initialize();
         _gamesWindow.OnClose -= GamesWindow_OnClose;
         _gamesWindow.OnClose += GamesWindow_OnClose;
 
-        var apiRequest = new APIRequest();
-        apiRequest.GetParsedData(ApiRequest_OnSuccess, ApiRequest_OnFail).Forget(); // Forget() is there to make it clear that await is to be avoided.
+        var apiRequest = new APIRequest(GlobalId.API_URL);
+        var result = await apiRequest.GetParsedData<GameDataContainer>(); // Forget() is there to make it clear that await is to be avoided.
+        if (result.IsSuccesful)
+        {
+            ApiRequest_OnSuccess(result.Data);
+        }
+        else
+        {
+            ApiRequest_OnFail(result.Exception);
+        }
     }
 
     private void ApiRequest_OnSuccess(GameDataContainer gameData)

@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Server.Data;
 using System;
 using UnityEngine.AddressableAssets;
 
@@ -6,22 +7,22 @@ namespace Extensions
 {
     public static class AddressableAssetLoader
     {
-        public static async UniTask LoadAsset<T>(string id, Action<T> onSuccess, Action<Exception> onFail)
+        public static async UniTask<RequstResult<T>> LoadAsset<T>(string id)
         {
-            var someAsset = Addressables.LoadAssetAsync<T>(id);
             try
             {
-                await someAsset;
-                onSuccess?.Invoke(someAsset.Result);
+                var asset = await Addressables.LoadAssetAsync<T>(id);
+                return new RequstResult<T>(asset);
             }
             catch (Exception exception)
             {
-                onFail?.Invoke(exception);
-            }
-            finally
-            {
-
+                return new RequstResult<T>(exception);
             }
         }
+    }
+
+    public static class AssetService
+    {
+        //public static async UniTask GetItems<Component>(Component component)
     }
 }

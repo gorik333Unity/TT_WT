@@ -56,7 +56,7 @@ namespace UI
             var result = await AddressableAssetLoader.LoadAsset<SimpleGameItem>(_assetName);
             if (result.IsSuccesful)
             {
-                
+                AssetLoader_OnSuccess(result.Data);
             }
             else
             {

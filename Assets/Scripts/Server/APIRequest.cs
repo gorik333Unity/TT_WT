@@ -20,7 +20,7 @@ namespace Server
             {
                 var client = new HttpClient();
                 var httpResponce = await client.GetAsync(_url);
-                httpResponce.EnsureSuccessStatusCode(); // Throws an exception if the IsSuccessStatusCode property for the HTTP response is false.
+                httpResponce.EnsureSuccessStatusCode(); 
 
                 var result = await httpResponce.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<T>(result);
